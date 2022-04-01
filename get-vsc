@@ -1,0 +1,40 @@
+#! /usr/bin/python3
+
+import subprocess
+import json
+import requests
+import os
+
+script_dir = os.path.abspath(__file__)
+configure_path = os.path.join(os.path.dirname(script_dir), "configure.json")
+
+configure_file = open(configure_path)
+configure = json.load(configure_file)
+configure_file.close()
+
+def download_binary(url: str, filefullpath: str):
+  res = requests.get(url, stream=True)
+  with open(filefullpath, 'wb') as f:
+    for chunk in res.iter_content(chunk_size=4096):
+      if chunk:
+        f.write(chunk)
+
+def extract_file(src: str, dst: str):
+  subprocess.run(['/usr/bin/tar', '-xf', src, '-C', os.path.dirname(dst)])
+
+def install_vsc(conf):
+  print('[-] install visual studio code')
+  zip_name = os.path.join(conf['install-root'], 'VSCode-darwin-universal.zip')
+  app_name = os.path.join(conf['install-root'], 'Visual Studio Code.app')
+  if (not os.path.exists(conf['install-root'])):
+    os.mkdir(conf['install-root'])
+  if (not os.path.exists(app_name)):
+    print('[-] download visual studio binary')
+    download_binary(conf['url'], zip_name)
+    print('[-] extract visual studio binary')
+    extract_file(zip_name, app_name)
+  print("[-] successfully installed")
+
+#def move_caches(conf):
+
+install_vsc(configure['vsc'])

@@ -1,0 +1,22 @@
+#! /usr/bin/python3
+
+import os
+import json
+import shutil
+
+script_dir = os.path.abspath(__file__)
+configure_path = os.path.join(os.path.dirname(script_dir), "configure.json")
+
+configure_file = open(configure_path)
+configure = json.load(configure_file)['remove-cache']
+configure_file.close()
+
+def on_failed_to_remove(func, path, exc_info):
+    print(f'[!] failed to remove {path}')
+
+print('[-] remove cache')
+for target_root in map(lambda x: os.path.join(configure['home'], x), configure['targets']):
+    if (os.path.exists(target_root)):
+        print(f'[-] remove from {target_root}')
+        for target in os.listdir(target_root):
+            shutil.rmtree(os.path.join(target_root, target), True, on_failed_to_remove)

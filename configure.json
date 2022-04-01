@@ -1,0 +1,22 @@
+{
+  "vsc": {
+    "url": "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal",
+    "install-root": "/goinfre/cjeon/Applications"
+  },
+  "remove-cache": {
+    "home": "/Users/cjeon",
+    "targets": [
+      "Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/Service Worker/CacheStorage",
+      "Library/Application Support/Slack/Service Worker/CacheStorage",
+      "Library/Caches",
+      "Library/Application Support/Code/CachedData"
+    ]
+  },
+  "link-cache": {
+    "home": "/Users/cjeon",
+    "link-root": "/goinfre/cjeon",
+    "targets": [
+      "Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux"
+    ]
+  }
+}

@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 
-from genericpath import exists
 import os
 import json
 import shutil
@@ -16,8 +15,19 @@ print('[-] link cache')
 for target_root in configure['targets']:
     src_root = os.path.join(configure['home'], target_root)
     dst_root = os.path.join(configure['link-root'], target_root)
+    
     print(f'[-] link from {src_root}')
-    if not os.path.exists(os.path.dirname(dst_root)):
+
+    if not os.path.exists(dst_root):
         os.makedirs(dst_root)
-    shutil.move(src_root, dst_root)
+
+    if os.path.exists(src_root):
+        if os.path.islink(src_root):
+            continue
+        if os.listdir(src_root):
+            shutil.rmtree(dst_root)
+            shutil.move(src_root, dst_root)
+        else:
+            shutil.rmtree(src_root)
+
     os.symlink(dst_root, src_root)

@@ -18,7 +18,6 @@
     "home": "/Users/cjeon",
     "link-root": "/goinfre/cjeon",
     "targets": [
-      "Library/Containers/com.docker.docker",
       "Library/Application Support/Code/User/workspaceStorage"
     ]
   }

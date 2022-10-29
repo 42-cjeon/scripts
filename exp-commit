@@ -1,0 +1,3 @@
+#! /bin/zsh
+
+docker commit exp00 exp:latest

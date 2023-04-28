@@ -1,0 +1,39 @@
+{
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "zenMode.centerLayout": false,
+    "editor.minimap.enabled": false,
+    "explorer.confirmDelete": false,
+    "nasm.reportWarnings": false,
+    "extensions.ignoreRecommendations": true,
+    "zenMode.hideLineNumbers": false,
+    "window.zoomLevel": 3,
+    "git.autofetch": true,
+    "conventionalCommits.gitmoji": false,
+    "conventionalCommits.promptScopes": false,
+    "conventionalCommits.promptFooter": false,
+    "C_Cpp.clang_format_fallbackStyle": "none",
+    "workbench.colorTheme": "Atom One Dark",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnType": true
+    },
+    "update.mode": "manual",
+    "editor.inlayHints.enabled": "off",
+    "C_Cpp.default.cStandard": "c17",
+    "nasm.outputFormat": "elf32",
+    "nasm.checkOnType": true,
+    "files.autoSave": "onFocusChange",
+    "[c]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "[rust]": {
+        "editor.formatOnSave": true,
+        "editor.insertSpaces": false
+    },
+    "window.commandCenter": false,
+    "C_Cpp.clang_format_style": "file:/Users/cjeon/.clang-format",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "clangd.path": "/goinfre/cjeon/newhome/vscode/code-portable-data/user-data/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.6/clangd_15.0.6/bin/clangd",
+}

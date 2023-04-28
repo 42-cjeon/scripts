@@ -1,0 +1,23 @@
+#! /bin/bash
+
+TEMP=$(mktemp -d)
+
+# install Rust toolchains
+
+RUSTUP_INIT=$TEMP/rustup-init
+$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) > $RUSTUP_INIT
+chmod +x $RUSTUP_INIT
+$RUSTUP_INIT -y --no-modify-path --default-toolchain nightly
+
+# install VSCode
+
+VSCODE=$TEMP/VSCode-darwin.zip
+
+mkdir -pv $VSCODE_HOME/code-portable-data
+curl -L 'https://code.visualstudio.com/sha/download?build=stable&os=darwin' -o $VSCODE
+tar -xvf $VSCODE -C $VSCODE_HOME
+xattr -dr com.apple.quarantine "$VSCODE_HOME/Visual Studio Code.app"
+
+load-vsc
+
+rm -rf $TEMP

@@ -1,6 +1,0 @@
-#! /bin/zsh
-
-docker stop exp00
-exp-commit
-docker rm exp00
-docker run -v/Users/cjeon/dockerhome:/shared --privileged --init -it --name exp00 exp zsh

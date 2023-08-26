@@ -1,23 +1,44 @@
 #! /bin/bash
 
+set -e
+
+if [ ! -d /goinfre/cjeon/newhome ]; then
+    mkdir -pv /goinfre/cjeon/newhome
+fi
+
 TEMP=$(mktemp -d)
 
-# install Rust toolchains
+trap 'rm -rf $TEMP' EXIT
 
-RUSTUP_INIT=$TEMP/rustup-init
-$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) > $RUSTUP_INIT
-chmod +x $RUSTUP_INIT
-$RUSTUP_INIT -y --no-modify-path --default-toolchain nightly
+# install Rust toolchains
+if ! which cargo >/dev/null; then
+    echo '[-] `cargo` not found.'
+ 
+    RUSTUP_INIT=$TEMP/rustup-init
+ 
+    echo '[-] downloading Rustup...'
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > $RUSTUP_INIT
+    chmod +x $RUSTUP_INIT
+
+    $RUSTUP_INIT -y --no-modify-path --default-toolchain nightly
+
+    test -f "$CARGO_ENV" && source "$CARGO_ENV"
+fi
 
 # install VSCode
 
-VSCODE=$TEMP/VSCode-darwin.zip
+if ! which code >/dev/null; then
+    echo '[-] `code` not found.'
+ 
+    VSCODE=$TEMP/VSCode-darwin.zip
+    mkdir -pv $VSCODE_HOME/code-portable-data
 
-mkdir -pv $VSCODE_HOME/code-portable-data
-curl -L 'https://code.visualstudio.com/sha/download?build=stable&os=darwin' -o $VSCODE
-tar -xvf $VSCODE -C $VSCODE_HOME
-xattr -dr com.apple.quarantine "$VSCODE_HOME/Visual Studio Code.app"
+    echo '[-] downloading VSCode.zip...'
+    curl --proto '=https' --tlsv1.2 -L -sSf 'https://code.visualstudio.com/sha/download?build=stable&os=darwin' -o $VSCODE
+    
+    echo '[-] extracting VSCode.zip...' 
+    tar -xf $VSCODE -C $VSCODE_HOME
 
-load-vsc
-
-rm -rf $TEMP
+    xattr -dr com.apple.quarantine "$VSCODE_HOME/Visual Studio Code.app"
+    load-vsc
+fi

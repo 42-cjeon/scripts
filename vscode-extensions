@@ -1,4 +1,6 @@
 akamud.vscode-theme-onedark
+basdp.language-gas-x86
+bierner.markdown-mermaid
 doinkythederp.nasm-language-support
 llvm-vs-code-extensions.vscode-clangd
 mhutchie.git-graph
@@ -14,10 +16,9 @@ ms-vscode-remote.remote-ssh-edit
 ms-vscode.cpptools
 ms-vscode.remote-explorer
 ritwickdey.LiveServer
-tamasfe.even-better-toml
+rust-lang.rust-analyzer
 tdennis4496.cmantic
 tomoki1207.pdf
 vadimcn.vscode-lldb
 vivaxy.vscode-conventional-commits
-wingrunr21.vscode-ruby
- 
+vscodevim.vim

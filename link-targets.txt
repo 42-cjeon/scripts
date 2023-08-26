@@ -1,0 +1,4 @@
+Library/Caches
+Library/Application Support/Slack/Service Worker/CacheStorage
+Library/Application Support/Slack/Code Cache
+Library/Application Support/Slack/Cache

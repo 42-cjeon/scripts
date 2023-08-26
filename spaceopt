@@ -1,0 +1,30 @@
+#! /bin/bash
+
+HERE=$(dirname $0)
+
+DIRS=$HERE/link-targets.txt
+
+LOCAL_HOME=/goinfre/cjeon/newhome
+REMOTE_HOME=/Users/cjeon
+
+while IFS= read DIR; do
+    FROM="$REMOTE_HOME/$DIR"
+    TO="$LOCAL_HOME/$DIR"
+
+    if [ ! -d "$TO" ]; then
+        mkdir -p "$TO"
+    fi
+
+    if [ ! -L "$FROM" ]; then
+        echo "[$(date)]: WARN: $FROM is not properly symlinked."
+        if [ "-f" = "$1" ]; then
+    	    rm -rf "$FROM"
+            TEMP=$(dirname "$FROM")
+    	    mkdir -p "$TEMP"
+    	    ln -s "$TO" "$FROM"
+        fi
+
+    fi
+done < $DIRS
+
+echo "[$(date)]: finished"

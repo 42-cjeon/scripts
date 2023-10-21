@@ -1,0 +1,20 @@
+#! /bin/bash
+
+HERE=$(dirname $0)
+
+VM="$1"
+
+if [ -z "$VM" ]; then
+    echo "usage: vm-select <vm name>" && exit 1
+fi
+
+VMROOT=/goinfre/cjeon/vmroot
+
+if [ ! -f "$VMROOT/$VM/run.sh" ]; then
+    echo "error: cannot find requested vm $VM."
+    echo "note: available vm are..."
+    find $VMROOT -name run.sh -and -depth 2 | xargs -L 1 dirname | xargs -L 1 basename | sed 's/^/ - /'
+    exit 1
+fi
+
+echo "$VMROOT/$VM/run.sh" > $HERE/selected-vm
